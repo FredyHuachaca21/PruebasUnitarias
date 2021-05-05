@@ -315,4 +315,18 @@ class CuentaTest {
         /*assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);*/
     }
 
+    @DisplayName("Probando Test Repetir")
+    @RepeatedTest(value = 5, name = "{displayName} - Repetición número {currentRepetition} de {totalRepetitions}")
+    void testDebitoCuentaRepeted(RepetitionInfo info) {
+
+        if (info.getCurrentRepetition()== 3){
+            System.out.println("Estamos en la repetición "+ info.getCurrentRepetition());
+        }
+        cuenta.debito(new BigDecimal(100));
+
+        assertNotNull(cuenta.getSaldo());
+        assertEquals(900, cuenta.getSaldo().intValue());
+        assertEquals("900.100", cuenta.getSaldo().toPlainString());
+    }
+
 }
